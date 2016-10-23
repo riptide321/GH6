@@ -1,0 +1,111 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package services;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+public class SearchS extends JFrame
+{
+
+    private JButton search = new JButton("Search");
+    private JTextField searchT = new JTextField(15);
+    private JFrame frame = new JFrame("Service");
+
+    public SearchS()
+    {
+        JPanel panel = new JPanel(new FlowLayout());
+        panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        panel.add(searchT);
+        panel.add(search);
+        frame.add(panel);
+        frame.setSize(200, 100);
+        frame.setLocation(800, 0);
+        frame.setVisible(true);
+        frame.setResizable(false);
+        search.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ArrayList<String> GatewayS = new ArrayList<>();
+                GatewayS.add("Emergency Housing");
+                GatewayS.add("Permanent Housing");
+                GatewayS.add("Employment");
+                Services Gateway180 = new Services("Gateway180", "Families", GatewayS);
+
+                ArrayList<String> SPC = new ArrayList<>();
+                SPC.add("Emergency Housing");
+                SPC.add("Permanent Housing");
+                SPC.add("Employment Housing");
+                SPC.add("Health Services");
+                Services StPatrickCenter = new Services("St. Patrick Center", "Everyone", SPC);
+
+                ArrayList<String> SM = new ArrayList<>();
+                SM.add("Youth Services");
+                SM.add("Mens Emergency Shelter");
+                SM.add("Mens Recovery Program");
+                SM.add("C.A.R.E Program");
+                Services SunshineMinistires = new Services("Sunshine Ministires", "Everyone", SM);
+
+                ArrayList<String> YES = new ArrayList<>();
+                YES.add("Counseling");
+                YES.add("GED Programs");
+                YES.add("Housing");
+                YES.add("Outreach");
+                YES.add("Aging Out");
+                Services Epworth = new Services("Epworth", "Youth", YES);
+
+                ArrayList<String> GMH = new ArrayList<>();
+                GMH.add("Mens Recovery Program");
+                GMH.add("Housing");
+                Services GenesisMensHome = new Services("Genesis Mens Home", "Men", GMH);
+
+                ArrayList<String> CH = new ArrayList<>();
+                CH.add("Outreach");
+                CH.add("Emergency Shelter");
+                CH.add("Counseling");
+                Services CovenantHouse = new Services("Covenent House", "Youth", CH);
+
+                ArrayList<String> BH = new ArrayList<>();
+                BH.add("Foreclosure Support");
+                BH.add("Housing");
+                BH.add("Education");
+                BH.add("Health");
+                BH.add("Employment");
+                Services BeyondHousing = new Services("Beyond Housing", "Families", BH);
+
+                Services[] stlPlace = new Services[6];
+                stlPlace[0] = Gateway180;
+                stlPlace[1] = StPatrickCenter;
+                stlPlace[2] = Epworth;
+                stlPlace[3] = GenesisMensHome;
+                stlPlace[4] = CovenantHouse;
+                stlPlace[5] = BeyondHousing;
+
+                String look = searchT.getText();
+                String answer = "";
+                ArrayList<String> loc = new ArrayList<>();
+                for (int x = 0; x < stlPlace.length; x++) {
+
+                    if (stlPlace[x].getServices().contains(look)) {
+                        loc.add(stlPlace[x].getName());
+                    }
+
+                }
+                
+                answer = "The locations are: " + loc.toString();
+
+                JOptionPane.showMessageDialog(null, answer);
+
+            }
+        });
+    }
+
+}
